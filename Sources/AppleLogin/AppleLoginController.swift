@@ -1,18 +1,17 @@
-import UIKit
+//import UIKit
 import Security
 import AuthenticationServices
 
-public protocol AppleLoginStatusProtocol {
+public protocol AppleLoginStatusProtocol: AnyObject {
     func loginSuccess(accessToken: String, name: String, email: String)
-    func loginFail(error: String)
-    func loginCancel(error: String)
+    func loginFail(error: AppleAuthError)
 }
 
 public class AppleLoginController {
-    private var delegate: AppleLoginStatusProtocol?
+    private weak var delegate: AppleLoginStatusProtocol?
     private lazy var appleSignInCoordinator = AppleSignInCoordinator(loginViewModel: self, delegate: delegate)
     
-    public init(delegate: AppleLoginStatusProtocol?) {
+    public init(delegate: AppleLoginStatusProtocol) {
         self.delegate = delegate
     }
     public func beginAppleLogin() {
@@ -33,7 +32,6 @@ private class AppleSignInCoordinator: NSObject, ASAuthorizationControllerDelegat
         self.delegate = delegate
     }
     
-    // Shows Sign in with Apple UI
     fileprivate func handleAuthorizationAppleIDButtonPress() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -47,11 +45,11 @@ private class AppleSignInCoordinator: NSObject, ASAuthorizationControllerDelegat
     // Delegate methods
     fileprivate func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            self.delegate?.loginFail(error: kAppleDeclinedPermissions)
+            self.delegate?.loginFail(error: .appleDeclinedPermissions)
             return
         }
         guard let appleIDToken = appleIDCredential.identityToken else {
-            self.delegate?.loginFail(error: kAccessTokenNotFound)
+            self.delegate?.loginFail(error: .accessTokenNotFound)
             return
         }
         guard let accessToken = String(data: appleIDToken, encoding: .utf8) else { return }
@@ -73,16 +71,13 @@ private class AppleSignInCoordinator: NSObject, ASAuthorizationControllerDelegat
         }
         
         if userName.isEmpty && userEmail.isEmpty {
-            self.delegate?.loginFail(error: kUserDataNotFound)
+            self.delegate?.loginFail(error: .userDataNotFound)
         } else {
             self.delegate?.loginSuccess(accessToken: accessToken, name: userName, email: userEmail)
         }
     }
         
     fileprivate func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        self.delegate?.loginFail(error: error.localizedDescription)
+        self.delegate?.loginFail(error: AppleAuthError(rawValue: error.localizedDescription) ?? .unknown)
     }
-    
 }
-
-

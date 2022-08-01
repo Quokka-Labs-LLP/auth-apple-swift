@@ -13,9 +13,9 @@ public class KeyChainData {
 
         // Add User Data
         if SecItemAdd(attributes as CFDictionary, nil) == noErr {
-            print("Data saved in keychain with encryption")
+            debugPrint("Data saved in keychain with encryption")
         } else {
-            print("Data already save in KeyChain or Something went wrong!")
+            debugPrint("Data already save in KeyChain or Something went wrong!")
         }
     }
     public func fetchKeychainData(key: String) -> String? {
@@ -39,7 +39,7 @@ public class KeyChainData {
                 return value
             } else { return nil }
         } else {
-            print("Something went wrong trying to find the user in the keychain")
+            debugPrint("Something went wrong trying to find the user in the keychain")
             return nil
         }
     }
@@ -52,10 +52,9 @@ public class KeyChainData {
 
         // Find user and delete
         if SecItemDelete(query as CFDictionary) == noErr {
-            print("User removed successfully from the keychain")
+            debugPrint("User removed successfully from the keychain")
         } else {
-            print("Something went wrong trying to remove the user from the keychain")
+            debugPrint("Something went wrong trying to remove the user from the keychain")
         }
     }
 }
-
