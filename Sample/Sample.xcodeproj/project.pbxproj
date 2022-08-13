@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5D708F3D78F39AC2DB441B26 /* Pods_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E617861786EB433286ECB85 /* Pods_Sample.framework */; };
+		EC4A9FAC28A80E2600D485EE /* AppleLogin in Frameworks */ = {isa = PBXBuildFile; productRef = EC4A9FAB28A80E2600D485EE /* AppleLogin */; };
 		ECD18BD7289F829400482513 /* SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD18BD6289F829400482513 /* SampleApp.swift */; };
 		ECD18BD9289F829400482513 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD18BD8289F829400482513 /* ContentView.swift */; };
 		ECD18BDB289F829400482513 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD18BDA289F829400482513 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D708F3D78F39AC2DB441B26 /* Pods_Sample.framework in Frameworks */,
+				EC4A9FAC28A80E2600D485EE /* AppleLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +123,7 @@
 			);
 			name = Sample;
 			packageProductDependencies = (
+				EC4A9FAB28A80E2600D485EE /* AppleLogin */,
 			);
 			productName = Sample;
 			productReference = ECD18BD3289F829400482513 /* Sample.app */;
@@ -151,6 +154,7 @@
 			);
 			mainGroup = ECD18BCA289F829400482513;
 			packageReferences = (
+				EC4A9FAA28A80E2600D485EE /* XCRemoteSwiftPackageReference "auth-apple-swift" */,
 			);
 			productRefGroup = ECD18BD4289F829400482513 /* Products */;
 			projectDirPath = "";
@@ -419,6 +423,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EC4A9FAA28A80E2600D485EE /* XCRemoteSwiftPackageReference "auth-apple-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://MjSiddiqui@bitbucket.org/sunychoudhary/auth-apple-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EC4A9FAB28A80E2600D485EE /* AppleLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC4A9FAA28A80E2600D485EE /* XCRemoteSwiftPackageReference "auth-apple-swift" */;
+			productName = AppleLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ECD18BCB289F829400482513 /* Project object */;
 }

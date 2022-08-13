@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "auth-apple-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://MjSiddiqui@bitbucket.org/sunychoudhary/auth-apple-swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "b2359a106c34bfb308aeca0d313f169bfa6ae296"
+      }
+    }
+  ],
+  "version" : 2
+}
