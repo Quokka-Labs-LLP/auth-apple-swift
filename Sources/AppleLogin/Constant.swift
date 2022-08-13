@@ -2,9 +2,9 @@ let kAppleUserName = "appleUserName"
 let kAppleUserEmail = "appleUserEmail"
 
 //MARK: some constant errors
-enum AppleAuthError: String {
+public enum AppleAuthError {
     case appleDeclinedPermissions
     case accessTokenNotFound
     case userDataNotFound
-    case unknown
+    case unknown(String)
 }
